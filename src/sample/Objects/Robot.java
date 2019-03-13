@@ -3,7 +3,6 @@ package sample.Objects;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import sample.Space.IMovableObject;
-import sample.Space.IRotatableObject;
 import sample.Space.Vector2D;
 import sample.View.IDrawable;
 
@@ -12,18 +11,13 @@ import sample.View.IDrawable;
  * @author DFallingHammer
  * @version 1.0.0
  */
-public class Robot extends SpaceObject implements IMovableObject, IRotatableObject, IDrawable {
+public class Robot extends SpaceObject implements IMovableObject, IDrawable {
     private Color color;
     private float width, height;
 
 
     @Override
     public void moveTo(Vector2D dest) {
-        //TODO: implement method
-    }
-
-    @Override
-    public void rotateTo(float dest) {
         //TODO: implement method
     }
 
