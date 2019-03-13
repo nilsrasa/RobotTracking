@@ -22,6 +22,7 @@ public class Main extends Application {
         Canvas canvas = new Canvas(600, 600);
         GraphicsContext context = canvas.getGraphicsContext2D();
         createObjects(context);
+        //TODO: move objects
 
         root.getChildren().add(canvas);
         stage.setTitle("JavaFX Scene Graph Demo");
