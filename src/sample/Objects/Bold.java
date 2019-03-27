@@ -21,6 +21,11 @@ public class Bold extends SpaceObject implements IMovableObject, IDrawable {
     }
 
     @Override
+    public void setSpeed(float speed) {
+
+    }
+
+    @Override
     public void draw(GraphicsContext context) {
         context.setFill(color);
         context.fillOval(
