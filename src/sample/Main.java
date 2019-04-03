@@ -54,34 +54,6 @@ public class Main extends Application {
         //robot.moveTo(new Vector2D(500, 250));
 
         //The obstacles:
-        /*Vector2D[] pos = {
-                new Vector2D(300, 450), //TOP
-                new Vector2D(300, 150), //BOTTOM
-                new Vector2D(30, 300), //LEFT
-                new Vector2D(570, 300) //RIGHT
-        };
-
-        float[] heights = {
-                15, 15,
-                315, 315
-        };
-
-        float[] widths = {
-                555, 555,
-                15, 15
-        };
-
-        Forhindring[] obstacles = new Forhindring[4];
-
-        for(int i = 0; i < 4; i++){
-            obstacles[i] = new Forhindring();
-            obstacles[i].setColor(Color.RED);
-            obstacles[i].setWidth(widths[i]);
-            obstacles[i].setHeight(heights[i]);
-            obstacles[i].setPos(pos[i]);
-            obstacles[i].draw(context);
-        }*/
-
         Forhindring[] obstacles = new Forhindring[8];
         Vector2D[][] points = TestData.getObstaclePoints();
 

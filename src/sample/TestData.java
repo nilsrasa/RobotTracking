@@ -46,7 +46,7 @@ public class TestData {
         //Lef top goal
         points[2][0] = corners[0];
         points[2][1] = goals[0];
-        //left goal bottm
+        //left goal bottom
         points[3][0] = corners[3];
         points[3][1] = goals[1];
         //right goal top
