@@ -30,11 +30,16 @@ public class Robot extends SpaceObject implements IMovableObject, IDrawable, Upd
     @Override
     public void draw(GraphicsContext context) {
         context.setFill(color);
-        context.fillRect(
-                position.getX()-width/2,
-                position.getY()-height/2,
-                width, height
-        );
+        context.fillPolygon(
+                new double[]{
+                        position.getX()-width/2,
+                        position.getX()-width/2,
+                        position.getX()+width/2},
+                new double[]{
+                        position.getY()-height/2,
+                        position.getY()+height/2,
+                        position.getY()},
+                3);
     }
 
     @Override

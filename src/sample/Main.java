@@ -28,7 +28,7 @@ public class Main extends Application {
 
         root.getChildren().add(canvas);
         stage.setTitle("JavaFX Scene Graph Demo");
-        stage.setScene(new Scene(root, Color.BLACK));
+        stage.setScene(new Scene(root, Color.DARKGREEN));
         stage.show();
     }
 
@@ -42,14 +42,14 @@ public class Main extends Application {
         grid = new Grid(width, height);
         Vector2D[] vA = TestData.corners;
         grid.setScale(vA[0], vA[1], vA[2], vA[3]);
-        grid.setColor(Color.GRAY);
+        grid.setColor(Color.GREEN);
 
         //The Robot:
         Robot robot = new Robot();
         robot.setPos(grid.translatePos(TestData.robot));
-        robot.setWidth(25);
-        robot.setHeight(25);
-        robot.setColor(Color.GREEN);
+        robot.setWidth(30);
+        robot.setHeight(30);
+        robot.setColor(Color.CYAN);
         grid.addObject(robot);
         //robot.setSpeed(.3f);
         //robot.moveTo(new Vector2D(500, 250));
