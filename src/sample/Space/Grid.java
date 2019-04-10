@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Represents a coordinate system grid
  * @author DFallingHammer
- * @version 1.0.0
+ * @version 1.0.1
  */
 public class Grid implements IDrawable {
     final float WIDTH, HEIGHT;

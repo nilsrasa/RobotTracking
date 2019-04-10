@@ -10,7 +10,7 @@ import sample.View.IDrawable;
 /**
  * Represents the robot
  * @author DFallingHammer
- * @version 1.0.0
+ * @version 1.0.1
  */
 public class Robot extends SpaceObject implements IMovableObject, IDrawable, UpdateListener {
     private Color color;

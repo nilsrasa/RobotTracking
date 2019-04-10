@@ -7,7 +7,7 @@ import sample.View.IDrawable;
 /**
  * Represents an obstacle
  * @author DFallingHammer
- * @version 1.0.0
+ * @version 1.0.1
  */
 public class Forhindring extends SpaceObject implements IDrawable {
     private Color color;
