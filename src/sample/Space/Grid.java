@@ -5,6 +5,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import sample.View.IDrawable;
 
+import java.lang.reflect.WildcardType;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Represents a coordinate system grid
  * @author DFallingHammer
@@ -12,10 +16,11 @@ import sample.View.IDrawable;
  */
 public class Grid implements IDrawable {
     final float WIDTH, HEIGHT;
-    final int CELLS_HOR = 45, CELLS_VER = 30;
-    final Vector2D CELL_SPACING;
+    final float CELLS_HOR = 45, CELLS_VER = 30, GOAL_LEFT = 14, GOAL_RIGHT = 12.5f;
+    public final Vector2D CELL_SPACING;
     Vector2D scale, offset, spacing;
     Color color;
+    List<IDrawable> objects = new ArrayList<>();
 
     public Grid(float width, float height){
         this.WIDTH = width;
@@ -58,8 +63,13 @@ public class Grid implements IDrawable {
         return pos;
     }
 
+    public void addObject(IDrawable object){
+        objects.add(object);
+    }
+
     @Override
     public void draw(GraphicsContext context) {
+        //Draw grid
         context.setStroke(Paint.valueOf(color.toString()));
         context.setLineWidth(2);
         //Draws the vertical grid-lines
@@ -71,6 +81,19 @@ public class Grid implements IDrawable {
         for (int i = 1; i < CELLS_VER; i++){
             context.strokeLine(0, i*CELL_SPACING.getY(), WIDTH, i*CELL_SPACING.getY());
         }
+        //Draw outline
+        context.setStroke(Paint.valueOf(Color.RED.toString()));
+        context.strokeLine(0,0,WIDTH,0); //Top
+        context.strokeLine(0,HEIGHT, WIDTH, HEIGHT); //Bottom
+        context.strokeLine(0,0,0, CELL_SPACING.getY()*GOAL_LEFT); //Left top
+        context.strokeLine(0, HEIGHT, 0, HEIGHT-CELL_SPACING.getY()*GOAL_LEFT);//Left bottom
+        context.strokeLine(WIDTH,0,WIDTH, CELL_SPACING.getY()*GOAL_RIGHT); //Right top
+        context.strokeLine(WIDTH, HEIGHT, WIDTH, HEIGHT-CELL_SPACING.getY()*GOAL_RIGHT);//Right bottom
+
+        //Draw children
+        for(IDrawable obj : objects){
+            obj.draw(context);
+        }
     }
 
     @Override
@@ -81,5 +104,9 @@ public class Grid implements IDrawable {
     @Override
     public void setColor(Color col) {
         this.color = col;
+    }
+
+    public Vector2D getCenterPos(){
+        return new Vector2D(WIDTH/2,HEIGHT/2);
     }
 }

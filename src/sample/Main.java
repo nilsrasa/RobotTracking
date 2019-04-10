@@ -43,57 +43,47 @@ public class Main extends Application {
         Vector2D[] vA = TestData.corners;
         grid.setScale(vA[0], vA[1], vA[2], vA[3]);
         grid.setColor(Color.GRAY);
-        grid.draw(context);
 
         //The Robot:
         Robot robot = new Robot();
         robot.setPos(grid.translatePos(TestData.robot));
-        robot.setWidth(30);
-        robot.setHeight(30);
+        robot.setWidth(25);
+        robot.setHeight(25);
         robot.setColor(Color.GREEN);
-        robot.draw(context);
+        grid.addObject(robot);
         //robot.setSpeed(.3f);
         //robot.moveTo(new Vector2D(500, 250));
 
-        //The obstacles:
-        /*Forhindring[] obstacles = new Forhindring[8];
-        Vector2D[][] points = TestData.getObstaclePoints();
+        //Obstacles
+        Forhindring obstacle = new Forhindring();
+        obstacle.setPos(grid.getCenterPos());
+        obstacle.setWidth(grid.CELL_SPACING.getX());
+        obstacle.setHeight(grid.CELL_SPACING.getY()*5);
+        obstacle.setColor(Color.RED);
+        grid.addObject(obstacle);
 
-        for (int i = 0; i < obstacles.length; i++){
-            obstacles[i] = new Forhindring();
-            obstacles[i].setWidth(15);
-            obstacles[i].setColor(Color.RED);
-            if (i < 6)
-                obstacles[i].setPoints(
-                        grid.translatePos(points[i][0]),
-                        grid.translatePos(points[i][1])
-                );
-            else if (i == 6)
-                obstacles[i].setPoints(
-                        new Vector2D(width/2 - 15, height/2),
-                        new Vector2D(width/2 + 15, height/2)
-                );
-            else
-                obstacles[i].setPoints(
-                        new Vector2D(width/2, height/2-15),
-                        new Vector2D(width/2, height/2+15)
-                );
-            obstacles[i].draw(context);
-
-        }*/
+        obstacle = new Forhindring();
+        obstacle.setPos(grid.getCenterPos());
+        obstacle.setWidth(grid.CELL_SPACING.getX()*5);
+        obstacle.setHeight(grid.CELL_SPACING.getY());
+        obstacle.setColor(Color.RED);
+        grid.addObject(obstacle);
 
         //Balls:
         vA = TestData.getBalls();
         Bold[] balls = new Bold[vA.length];
         for (int i = 0; i < vA.length; i++){
             balls[i] = new Bold();
-            balls[i].setWidth(8);
-            balls[i].setHeight(8);
+            balls[i].setWidth(grid.CELL_SPACING.getX());
+            balls[i].setHeight(grid.CELL_SPACING.getY());
             balls[i].setColor(Color.WHITE);
             balls[i].setPos(
                     grid.translatePos(vA[i])
             );
-            balls[i].draw(context);
+            grid.addObject(balls[i]);
         }
+
+        //Draw the map
+        grid.draw(context);
     }
 }
