@@ -28,28 +28,4 @@ public interface IDrawable {
      */
     void setColor(Color col);
 
-    /**
-     * Returns the float height
-     * @return float height
-     */
-    float getHeight();
-
-    /**
-     * Sets the float height
-     * @param height the new height
-     */
-    void setHeight(float height);
-
-    /**
-     * Returns the float width
-     * @return float width
-     */
-    float getWidth();
-
-    /**
-     * Sets the float width
-     * @param width the new width
-     */
-    void setWidth(float width);
-
 }

@@ -14,7 +14,6 @@ import sample.View.IDrawable;
  */
 public class Robot extends SpaceObject implements IMovableObject, IDrawable, UpdateListener {
     private Color color;
-    private float width, height;
     private Vector2D dest;
     private float speed;
 
@@ -46,26 +45,6 @@ public class Robot extends SpaceObject implements IMovableObject, IDrawable, Upd
     @Override
     public void setColor(Color col) {
         this.color = col;
-    }
-
-    @Override
-    public float getHeight() {
-        return height;
-    }
-
-    @Override
-    public void setHeight(float height) {
-        this.height = height;
-    }
-
-    @Override
-    public float getWidth() {
-        return width;
-    }
-
-    @Override
-    public void setWidth(float width) {
-        this.width = width;
     }
 
     @Override

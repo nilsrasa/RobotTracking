@@ -13,7 +13,6 @@ import sample.View.IDrawable;
  */
 public class Bold extends SpaceObject implements IMovableObject, IDrawable {
     private Color color;
-    private float width, height;
 
     @Override
     public void moveTo(Vector2D dest) {
@@ -43,25 +42,5 @@ public class Bold extends SpaceObject implements IMovableObject, IDrawable {
     @Override
     public void setColor(Color col) {
         this.color = col;
-    }
-
-    @Override
-    public float getHeight() {
-        return height;
-    }
-
-    @Override
-    public void setHeight(float height) {
-        this.height = height;
-    }
-
-    @Override
-    public float getWidth() {
-        return width;
-    }
-
-    @Override
-    public void setWidth(float width) {
-        this.width = width;
     }
 }

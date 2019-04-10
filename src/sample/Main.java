@@ -42,6 +42,8 @@ public class Main extends Application {
         grid = new Grid(width, height);
         Vector2D[] vA = TestData.corners;
         grid.setScale(vA[0], vA[1], vA[2], vA[3]);
+        grid.setColor(Color.GRAY);
+        grid.draw(context);
 
         //The Robot:
         Robot robot = new Robot();
@@ -54,7 +56,7 @@ public class Main extends Application {
         //robot.moveTo(new Vector2D(500, 250));
 
         //The obstacles:
-        Forhindring[] obstacles = new Forhindring[8];
+        /*Forhindring[] obstacles = new Forhindring[8];
         Vector2D[][] points = TestData.getObstaclePoints();
 
         for (int i = 0; i < obstacles.length; i++){
@@ -78,7 +80,7 @@ public class Main extends Application {
                 );
             obstacles[i].draw(context);
 
-        }
+        }*/
 
         //Balls:
         vA = TestData.getBalls();
