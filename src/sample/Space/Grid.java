@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class Grid implements IDrawable {
     final float WIDTH, HEIGHT;
-    final float CELLS_HOR = 45, CELLS_VER = 30, GOAL_LEFT = 14, GOAL_RIGHT = 12.5f;
+    public final float CELLS_HOR = 45, CELLS_VER = 30, GOAL_LEFT = 2, GOAL_RIGHT = 5;
     public final Vector2D CELL_SPACING;
     Vector2D scale, offset, spacing;
     Color color;
@@ -70,7 +70,7 @@ public class Grid implements IDrawable {
     @Override
     public void draw(GraphicsContext context) {
         //Draw grid
-        context.setStroke(Paint.valueOf(color.toString()));
+        context.setStroke(color);
         context.setLineWidth(2);
         //Draws the vertical grid-lines
         for (int i = 1; i < CELLS_HOR; i++){
@@ -82,13 +82,11 @@ public class Grid implements IDrawable {
             context.strokeLine(0, i*CELL_SPACING.getY(), WIDTH, i*CELL_SPACING.getY());
         }
         //Draw outline
-        context.setStroke(Paint.valueOf(Color.RED.toString()));
+        context.setStroke(Color.RED);
         context.strokeLine(0,0,WIDTH,0); //Top
         context.strokeLine(0,HEIGHT, WIDTH, HEIGHT); //Bottom
-        context.strokeLine(0,0,0, CELL_SPACING.getY()*GOAL_LEFT); //Left top
-        context.strokeLine(0, HEIGHT, 0, HEIGHT-CELL_SPACING.getY()*GOAL_LEFT);//Left bottom
-        context.strokeLine(WIDTH,0,WIDTH, CELL_SPACING.getY()*GOAL_RIGHT); //Right top
-        context.strokeLine(WIDTH, HEIGHT, WIDTH, HEIGHT-CELL_SPACING.getY()*GOAL_RIGHT);//Right bottom
+        context.strokeLine(0,0,0, HEIGHT); //Left
+        context.strokeLine(WIDTH,0,WIDTH, HEIGHT); //Right
 
         //Draw children
         for(IDrawable obj : objects){
@@ -108,5 +106,13 @@ public class Grid implements IDrawable {
 
     public Vector2D getCenterPos(){
         return new Vector2D(WIDTH/2,HEIGHT/2);
+    }
+
+    public Vector2D getLeftCenterPos() {
+        return new Vector2D(0, HEIGHT/2);
+    }
+
+    public Vector2D getRightCenterPos() {
+        return new Vector2D(WIDTH, HEIGHT/2);
     }
 }

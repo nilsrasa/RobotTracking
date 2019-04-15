@@ -9,6 +9,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import sample.Objects.Bold;
 import sample.Objects.Forhindring;
+import sample.Objects.Mål;
 import sample.Objects.Robot;
 import sample.Space.Grid;
 import sample.Space.Vector2D;
@@ -49,7 +50,7 @@ public class Main extends Application {
         robot.setPos(grid.translatePos(TestData.robot));
         robot.setWidth(30);
         robot.setHeight(30);
-        robot.setColor(Color.CYAN);
+        robot.setColor(Color.LIGHTGREEN);
         grid.addObject(robot);
         //robot.setSpeed(.3f);
         //robot.moveTo(new Vector2D(500, 250));
@@ -68,6 +69,21 @@ public class Main extends Application {
         obstacle.setHeight(grid.CELL_SPACING.getY());
         obstacle.setColor(Color.RED);
         grid.addObject(obstacle);
+
+        //Goals
+        Mål goal = new Mål();
+        goal.setPos(grid.getLeftCenterPos());
+        goal.setWidth(5);
+        goal.setHeight(grid.GOAL_LEFT*grid.CELL_SPACING.getY());
+        goal.setColor(Color.LIGHTGRAY);
+        grid.addObject(goal);
+
+        goal = new Mål();
+        goal.setPos(grid.getRightCenterPos());
+        goal.setWidth(5);
+        goal.setHeight(grid.GOAL_RIGHT*grid.CELL_SPACING.getY());
+        goal.setColor(Color.LIGHTGRAY);
+        grid.addObject(goal);
 
         //Balls:
         vA = TestData.getBalls();
