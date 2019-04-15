@@ -12,12 +12,14 @@ import sample.Objects.Forhindring;
 import sample.Objects.Mål;
 import sample.Objects.Robot;
 import sample.Space.Grid;
+import sample.Space.Node;
 import sample.Space.Vector2D;
 
 import java.util.Random;
 
 public class Main extends Application {
     Grid grid;
+    Node[][] nodes;
     float width = 600, height = 400;
 
     @Override
@@ -44,6 +46,20 @@ public class Main extends Application {
         Vector2D[] vA = TestData.corners;
         grid.setScale(vA[0], vA[1], vA[2], vA[3]);
         grid.setColor(Color.GREEN);
+
+        //Nodes
+        nodes = new Node[(int)grid.CELLS_HOR][(int)grid.CELLS_VER];
+        for (int i = 0; i < nodes.length; i++){
+            for (int j = 0; j < nodes[i].length; j++){
+                float x, y;
+                x = grid.CELL_SPACING.getX()*i + grid.CELL_SPACING.getX()/2;
+                y = grid.CELL_SPACING.getY()*j + grid.CELL_SPACING.getY()/2;
+                nodes[i][j] = new Node(x, y);
+                //Debugging
+                //nodes[i][j].print(i,j);
+                nodes[i][j].draw(context);
+            }
+        }
 
         //The Robot:
         Robot robot = new Robot();

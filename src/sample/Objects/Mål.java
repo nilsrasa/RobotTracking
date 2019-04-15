@@ -4,6 +4,11 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import sample.View.IDrawable;
 
+/**
+ * Represents a goal
+ * @author DFallingHammer
+ * @version 1.0.0
+ */
 public class Mål extends SpaceObject implements IDrawable {
     Color color;
 
