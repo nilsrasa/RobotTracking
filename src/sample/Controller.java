@@ -16,6 +16,7 @@ import java.util.Set;
 
 public class Controller {
     Kort map;
+    final boolean DEBUG = true;
 
     public void createMap(Kort map){
         this.map = map;
@@ -41,6 +42,10 @@ public class Controller {
                 x = grid.CELL_SPACING.getX()*i + grid.CELL_SPACING.getX()/2;
                 y = grid.CELL_SPACING.getY()*j + grid.CELL_SPACING.getY()/2;
                 nodes[i][j] = new Node(x, y);
+                if (DEBUG){
+                    nodes[i][j].setColor(Colors.NODE);
+                    grid.addObject(nodes[i][j]);
+                }
             }
         }
         map.setNodes(nodes);

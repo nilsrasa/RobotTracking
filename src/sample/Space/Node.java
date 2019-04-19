@@ -2,6 +2,7 @@ package sample.Space;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import sample.View.IDrawable;
 
 /**
  * Each node correspond to a cell from the grid.
@@ -9,8 +10,9 @@ import javafx.scene.paint.Color;
  * @author DFallingHammer
  * @version 1.0.0
  */
-public class Node {
+public class Node implements IDrawable {
     final Vector2D position;
+    private Color color;
 
     public Node (float x, float y){
         this.position = new Vector2D(x,y);
@@ -36,5 +38,15 @@ public class Node {
                 position.getY()-1,
                 2, 2
         );
+    }
+
+    @Override
+    public Color getColor() {
+        return this.color;
+    }
+
+    @Override
+    public void setColor(Color col) {
+        this.color = col;
     }
 }

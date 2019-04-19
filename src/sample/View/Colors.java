@@ -10,6 +10,7 @@ public class Colors {
     ROBOT = Color.LIGHTGREEN,
     BALL = Color.WHITE,
     GOAL = Color.LIGHTGRAY,
-    OBSTACLE = Color.RED;
+    OBSTACLE = Color.RED,
+    NODE = Color.CORAL;
 
 }
