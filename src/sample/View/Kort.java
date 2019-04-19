@@ -5,6 +5,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import sample.Debug;
 import sample.Objects.Bold;
 import sample.Objects.Forhindring;
 import sample.Objects.Mål;
@@ -27,6 +28,7 @@ public class Kort {
     private Set<Bold> balls;
     private Set<Mål> goals;
     private Set<Forhindring> obstacles;
+    private Set<IDrawable> debug;
     private Canvas canvas;
     private boolean scaled = false;
     private final float WIDTH, HEIGHT;
@@ -35,6 +37,7 @@ public class Kort {
         this.canvas = canvas;
         this.WIDTH = (float)canvas.getWidth();
         this.HEIGHT = (float)canvas.getHeight();
+
     }
 
     public Grid getGrid() {
@@ -101,11 +104,30 @@ public class Kort {
         this.obstacles = obstacles;
     }
 
+    public void addDebugObject(IDrawable obj){
+        if (debug == null)
+            debug = new HashSet<>();
+        debug.add(obj);
+    }
+
     public void update(){
         GraphicsContext context = canvas.getGraphicsContext2D();
         context.clearRect(0,0,WIDTH,HEIGHT); //Clear canvas
 
         grid.draw(context);
+        robot.draw(context);
+        for(Bold ball:balls)
+            ball.draw(context);
+
+        for(Forhindring obstacle:obstacles)
+            obstacle.draw(context);
+
+        for(Mål goal:goals)
+            goal.draw(context);
+
+        if(Debug.DEBUG)
+            for(IDrawable obj:debug)
+                obj.draw(context);
 
     }
 }

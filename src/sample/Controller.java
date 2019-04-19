@@ -16,7 +16,6 @@ import java.util.Set;
 
 public class Controller {
     Kort map;
-    final boolean DEBUG = true;
 
     public void createMap(Kort map){
         this.map = map;
@@ -42,9 +41,9 @@ public class Controller {
                 x = grid.CELL_SPACING.getX()*i + grid.CELL_SPACING.getX()/2;
                 y = grid.CELL_SPACING.getY()*j + grid.CELL_SPACING.getY()/2;
                 nodes[i][j] = new Node(x, y);
-                if (DEBUG){
+                if (Debug.DEBUG){
                     nodes[i][j].setColor(Colors.NODE);
-                    grid.addObject(nodes[i][j]);
+                    map.addDebugObject(nodes[i][j]);
                 }
             }
         }
@@ -56,7 +55,6 @@ public class Controller {
         robot.setWidth(30);
         robot.setHeight(30);
         robot.setColor(Colors.ROBOT);
-        grid.addObject(robot);
         map.setRobot(robot);
 
         //Obstacles
@@ -67,7 +65,6 @@ public class Controller {
         obstacle.setHeight(grid.CELL_SPACING.getY()*5);
         obstacle.setColor(Colors.OBSTACLE);
         obstacles.add(obstacle);
-        grid.addObject(obstacle);
 
         obstacle = new Forhindring();
         obstacle.setPos(grid.getCenterPos());
@@ -75,7 +72,6 @@ public class Controller {
         obstacle.setHeight(grid.CELL_SPACING.getY());
         obstacle.setColor(Colors.OBSTACLE);
         obstacles.add(obstacle);
-        grid.addObject(obstacle);
         map.setObstacles(obstacles);
 
         //Goals
@@ -86,7 +82,6 @@ public class Controller {
         goal.setHeight(grid.GOAL_LEFT*grid.CELL_SPACING.getY());
         goal.setColor(Colors.GOAL);
         goals.add(goal);
-        grid.addObject(goal);
 
         goal = new Mål();
         goal.setPos(grid.getRightCenterPos());
@@ -94,7 +89,6 @@ public class Controller {
         goal.setHeight(grid.GOAL_RIGHT*grid.CELL_SPACING.getY());
         goal.setColor(Colors.GOAL);
         goals.add(goal);
-        grid.addObject(goal);
         map.setGoals(goals);
 
         //Balls:
@@ -108,7 +102,6 @@ public class Controller {
             balls[i].setPos(
                     grid.translatePos(vA[i])
             );
-            grid.addObject(balls[i]);
         }
         map.setBalls(new HashSet<>(Arrays.asList(balls)));
 

@@ -2,13 +2,8 @@ package sample.Space;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import sample.View.Colors;
 import sample.View.IDrawable;
-
-import java.lang.reflect.WildcardType;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Represents a coordinate system grid
@@ -21,7 +16,6 @@ public class Grid implements IDrawable {
     public final Vector2D CELL_SPACING;
     Vector2D scale, offset, spacing;
     Color color;
-    List<IDrawable> objects = new ArrayList<>();
 
     public Grid(float width, float height){
         this.WIDTH = width;
@@ -64,10 +58,6 @@ public class Grid implements IDrawable {
         return pos;
     }
 
-    public void addObject(IDrawable object){
-        objects.add(object);
-    }
-
     @Override
     public void draw(GraphicsContext context) {
         //Draw grid
@@ -89,11 +79,6 @@ public class Grid implements IDrawable {
         context.strokeLine(0,HEIGHT, WIDTH, HEIGHT); //Bottom
         context.strokeLine(0,0,0, HEIGHT); //Left
         context.strokeLine(WIDTH,0,WIDTH, HEIGHT); //Right
-
-        //Draw children
-        for(IDrawable obj : objects){
-            obj.draw(context);
-        }
     }
 
     @Override
