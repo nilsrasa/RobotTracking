@@ -3,6 +3,7 @@ package sample.Space;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import sample.View.Colors;
 import sample.View.IDrawable;
 
 import java.lang.reflect.WildcardType;
@@ -81,8 +82,9 @@ public class Grid implements IDrawable {
         for (int i = 1; i < CELLS_VER; i++){
             context.strokeLine(0, i*CELL_SPACING.getY(), WIDTH, i*CELL_SPACING.getY());
         }
-        //Draw outline
-        context.setStroke(Color.RED);
+
+        //Borders
+        context.setStroke(Colors.OBSTACLE);
         context.strokeLine(0,0,WIDTH,0); //Top
         context.strokeLine(0,HEIGHT, WIDTH, HEIGHT); //Bottom
         context.strokeLine(0,0,0, HEIGHT); //Left

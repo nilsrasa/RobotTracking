@@ -35,98 +35,6 @@ public class Kort {
         this.canvas = canvas;
         this.WIDTH = (float)canvas.getWidth();
         this.HEIGHT = (float)canvas.getHeight();
-        createObjects();
-    }
-
-    private void createObjects(){
-        GraphicsContext context = canvas.getGraphicsContext2D();
-
-        //TODO: default scale values
-        //TODO: maybe keep the object references in this class (not both grid and this).
-
-        //Grid
-        grid = new Grid(WIDTH, HEIGHT);
-        Vector2D[] vA = TestData.corners;
-        grid.setScale(vA[0], vA[1], vA[2], vA[3]);
-        grid.setColor(Color.GREEN);
-
-        //Nodes
-        nodes = new Node[(int)grid.CELLS_HOR][(int)grid.CELLS_VER];
-        for (int i = 0; i < nodes.length; i++){
-            for (int j = 0; j < nodes[i].length; j++){
-                float x, y;
-                x = grid.CELL_SPACING.getX()*i + grid.CELL_SPACING.getX()/2;
-                y = grid.CELL_SPACING.getY()*j + grid.CELL_SPACING.getY()/2;
-                nodes[i][j] = new Node(x, y);
-                //Debugging
-                //nodes[i][j].print(i,j);
-                nodes[i][j].draw(context);
-            }
-        }
-
-        //The Robot:
-        robot = new Robot();
-        robot.setPos(grid.translatePos(TestData.robot));
-        robot.setWidth(30);
-        robot.setHeight(30);
-        robot.setColor(Color.LIGHTGREEN);
-        grid.addObject(robot);
-        //robot.setSpeed(.3f);
-        //robot.moveTo(new Vector2D(500, 250));
-
-        //Obstacles
-        obstacles = new HashSet<>();
-        Forhindring obstacle = new Forhindring();
-        obstacle.setPos(grid.getCenterPos());
-        obstacle.setWidth(grid.CELL_SPACING.getX());
-        obstacle.setHeight(grid.CELL_SPACING.getY()*5);
-        obstacle.setColor(Color.RED);
-        obstacles.add(obstacle);
-        grid.addObject(obstacle);
-
-        obstacle = new Forhindring();
-        obstacle.setPos(grid.getCenterPos());
-        obstacle.setWidth(grid.CELL_SPACING.getX()*5);
-        obstacle.setHeight(grid.CELL_SPACING.getY());
-        obstacle.setColor(Color.RED);
-        obstacles.add(obstacle);
-        grid.addObject(obstacle);
-
-        //Goals
-        goals = new HashSet<>();
-        Mål goal = new Mål();
-        goal.setPos(grid.getLeftCenterPos());
-        goal.setWidth(5);
-        goal.setHeight(grid.GOAL_LEFT*grid.CELL_SPACING.getY());
-        goal.setColor(Color.LIGHTGRAY);
-        goals.add(goal);
-        grid.addObject(goal);
-
-        goal = new Mål();
-        goal.setPos(grid.getRightCenterPos());
-        goal.setWidth(5);
-        goal.setHeight(grid.GOAL_RIGHT*grid.CELL_SPACING.getY());
-        goal.setColor(Color.LIGHTGRAY);
-        goals.add(goal);
-        grid.addObject(goal);
-
-        //Balls:
-        vA = TestData.getBalls();
-        Bold[] balls = new Bold[vA.length];
-        for (int i = 0; i < vA.length; i++){
-            balls[i] = new Bold();
-            balls[i].setWidth(grid.CELL_SPACING.getX());
-            balls[i].setHeight(grid.CELL_SPACING.getY());
-            balls[i].setColor(Color.WHITE);
-            balls[i].setPos(
-                    grid.translatePos(vA[i])
-            );
-            grid.addObject(balls[i]);
-        }
-        this.balls = new HashSet<>(Arrays.asList(balls));
-
-        //Draw the map
-        update();
     }
 
     public Grid getGrid() {
@@ -159,6 +67,38 @@ public class Kort {
 
     public boolean isScaled() {
         return scaled;
+    }
+
+    public float getWIDTH() {
+        return WIDTH;
+    }
+
+    public float getHEIGHT() {
+        return HEIGHT;
+    }
+
+    public void setGrid(Grid grid) {
+        this.grid = grid;
+    }
+
+    public void setNodes(Node[][] nodes) {
+        this.nodes = nodes;
+    }
+
+    public void setRobot(Robot robot) {
+        this.robot = robot;
+    }
+
+    public void setBalls(Set<Bold> balls) {
+        this.balls = balls;
+    }
+
+    public void setGoals(Set<Mål> goals) {
+        this.goals = goals;
+    }
+
+    public void setObstacles(Set<Forhindring> obstacles) {
+        this.obstacles = obstacles;
     }
 
     public void update(){

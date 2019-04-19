@@ -9,14 +9,16 @@ import sample.View.Colors;
 import sample.View.Kort;
 
 public class Main extends Application {
-    Kort map;
     float width = 600, height = 400;
 
     @Override
     public void start(Stage stage) throws Exception{
         Group root = new Group();
         Canvas canvas = new Canvas(width, height);
-        map = new Kort(canvas);
+
+        Controller controller = new Controller();
+        controller.createMap(new Kort(canvas));
+        controller.start();
 
         root.getChildren().add(canvas);
         stage.setTitle("JavaFX Scene Graph Demo");
