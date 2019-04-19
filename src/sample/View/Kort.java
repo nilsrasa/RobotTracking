@@ -15,6 +15,8 @@ import sample.Space.Vector2D;
 import sample.TestData;
 import sample.View.IDrawable;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -33,10 +35,14 @@ public class Kort {
         this.canvas = canvas;
         this.WIDTH = (float)canvas.getWidth();
         this.HEIGHT = (float)canvas.getHeight();
+        createObjects();
     }
 
     private void createObjects(){
         GraphicsContext context = canvas.getGraphicsContext2D();
+
+        //TODO: default scale values
+        //TODO: maybe keep the object references in this class (not both grid and this).
 
         //Grid
         grid = new Grid(WIDTH, HEIGHT);
@@ -59,7 +65,7 @@ public class Kort {
         }
 
         //The Robot:
-        Robot robot = new Robot();
+        robot = new Robot();
         robot.setPos(grid.translatePos(TestData.robot));
         robot.setWidth(30);
         robot.setHeight(30);
@@ -69,11 +75,13 @@ public class Kort {
         //robot.moveTo(new Vector2D(500, 250));
 
         //Obstacles
+        obstacles = new HashSet<>();
         Forhindring obstacle = new Forhindring();
         obstacle.setPos(grid.getCenterPos());
         obstacle.setWidth(grid.CELL_SPACING.getX());
         obstacle.setHeight(grid.CELL_SPACING.getY()*5);
         obstacle.setColor(Color.RED);
+        obstacles.add(obstacle);
         grid.addObject(obstacle);
 
         obstacle = new Forhindring();
@@ -81,14 +89,17 @@ public class Kort {
         obstacle.setWidth(grid.CELL_SPACING.getX()*5);
         obstacle.setHeight(grid.CELL_SPACING.getY());
         obstacle.setColor(Color.RED);
+        obstacles.add(obstacle);
         grid.addObject(obstacle);
 
         //Goals
+        goals = new HashSet<>();
         Mål goal = new Mål();
         goal.setPos(grid.getLeftCenterPos());
         goal.setWidth(5);
         goal.setHeight(grid.GOAL_LEFT*grid.CELL_SPACING.getY());
         goal.setColor(Color.LIGHTGRAY);
+        goals.add(goal);
         grid.addObject(goal);
 
         goal = new Mål();
@@ -96,6 +107,7 @@ public class Kort {
         goal.setWidth(5);
         goal.setHeight(grid.GOAL_RIGHT*grid.CELL_SPACING.getY());
         goal.setColor(Color.LIGHTGRAY);
+        goals.add(goal);
         grid.addObject(goal);
 
         //Balls:
@@ -111,6 +123,7 @@ public class Kort {
             );
             grid.addObject(balls[i]);
         }
+        this.balls = new HashSet<>(Arrays.asList(balls));
 
         //Draw the map
         update();
