@@ -5,11 +5,11 @@ import sample.Space.Vector2D;
 /**
  * Represents an object in 2d space
  * @author DFallingHammer
- * @version 1.0.0
+ * @version 1.0.1
  */
 public abstract class SpaceObject {
     protected Vector2D position;
-    protected float rotation;
+    protected float rotation, height, width;
 
     /**
      * Returns the current x,y position as a Vector2D
@@ -43,4 +43,35 @@ public abstract class SpaceObject {
         this.rotation = rot;
     }
 
+    /**
+     * Returns the float height
+     * @return float height
+     */
+    public float getHeight(){
+        return this.height;
+    }
+
+    /**
+     * Sets the float height
+     * @param height the new height
+     */
+    public void setHeight(float height){
+        this.height = height;
+    }
+
+    /**
+     * Returns the float width
+     * @return float width
+     */
+    public float getWidth(){
+        return this.width;
+    }
+
+    /**
+     * Sets the float width
+     * @param width the new width
+     */
+    public void setWidth(float width){
+        this.width = width;
+    }
 }

@@ -10,11 +10,10 @@ import sample.View.IDrawable;
 /**
  * Represents the robot
  * @author DFallingHammer
- * @version 1.0.0
+ * @version 1.0.1
  */
 public class Robot extends SpaceObject implements IMovableObject, IDrawable, UpdateListener {
     private Color color;
-    private float width, height;
     private Vector2D dest;
     private float speed;
 
@@ -31,11 +30,16 @@ public class Robot extends SpaceObject implements IMovableObject, IDrawable, Upd
     @Override
     public void draw(GraphicsContext context) {
         context.setFill(color);
-        context.fillRect(
-                position.getX()-width/2,
-                position.getY()-height/2,
-                width, height
-        );
+        context.fillPolygon(
+                new double[]{
+                        position.getX()-width/2,
+                        position.getX()-width/2,
+                        position.getX()+width/2},
+                new double[]{
+                        position.getY()-height/2,
+                        position.getY()+height/2,
+                        position.getY()},
+                3);
     }
 
     @Override
@@ -46,26 +50,6 @@ public class Robot extends SpaceObject implements IMovableObject, IDrawable, Upd
     @Override
     public void setColor(Color col) {
         this.color = col;
-    }
-
-    @Override
-    public float getHeight() {
-        return height;
-    }
-
-    @Override
-    public void setHeight(float height) {
-        this.height = height;
-    }
-
-    @Override
-    public float getWidth() {
-        return width;
-    }
-
-    @Override
-    public void setWidth(float width) {
-        this.width = width;
     }
 
     @Override

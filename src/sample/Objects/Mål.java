@@ -5,21 +5,19 @@ import javafx.scene.paint.Color;
 import sample.View.IDrawable;
 
 /**
- * Represents an obstacle
+ * Represents a goal
  * @author DFallingHammer
- * @version 1.0.1
+ * @version 1.0.0
  */
-public class Forhindring extends SpaceObject implements IDrawable {
-    private Color color;
+public class Mål extends SpaceObject implements IDrawable {
+    Color color;
+
 
     @Override
     public void draw(GraphicsContext context) {
-        context.setFill(color);
-        context.fillRect(
-                position.getX()-width/2,
-                position.getY()-height/2,
-                width, height
-        );
+        context.setStroke(color);
+        context.setLineWidth(width);
+        context.strokeLine(position.getX(),position.getY()-height/2,position.getX(),position.getY()+height/2);
     }
 
     @Override
