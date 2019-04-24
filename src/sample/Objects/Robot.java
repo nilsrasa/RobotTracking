@@ -91,7 +91,6 @@ public class Robot extends SpaceObject implements IMovableObject, IDrawable, Upd
                 (v.getMagnitude() * direction.getMagnitude());
 
         rotation = (float)Math.toDegrees(Math.acos(cos0))+d;
-        System.out.println(rotation);
     }
 
     @Override

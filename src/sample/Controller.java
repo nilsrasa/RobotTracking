@@ -18,7 +18,7 @@ import java.util.Set;
 
 public class Controller {
     private final int NANOMILLI = 1000000,
-    UPDATETIME = 100000*NANOMILLI;
+    UPDATETIME = 5000;
     Kort map;
     private long lastTime;
 
@@ -39,8 +39,9 @@ public class Controller {
                 //map.getRobot().setRotation(map.getRobot().getRotation()+15);
 
                 //Runs every UPDATETIME
-                if (now - UPDATETIME > lastTime) {
-                    lastTime = now;
+                long cur = System.currentTimeMillis();
+                if (cur - lastTime > UPDATETIME) {
+                    lastTime = cur;
 
                     Grid grid = map.getGrid();
 
