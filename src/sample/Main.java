@@ -18,13 +18,16 @@ public class Main extends Application {
 
         Controller controller = new Controller();
         controller.createMap(new Kort(canvas));
-        controller.start();
+
 
         root.getChildren().add(canvas);
         stage.setTitle("JavaFX Scene Graph Demo");
         stage.setScene(new Scene(root, Colors.BACKGROUND));
         stage.show();
+        controller.start();
     }
+
+
 
 
     public static void main(String[] args) {

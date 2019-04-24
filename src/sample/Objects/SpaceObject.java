@@ -16,7 +16,7 @@ public abstract class SpaceObject {
      * @return Vector2D of current position
      */
     public Vector2D getPos() {
-        return Vector2D.CopyOf(this.position);
+        return this.position;
     }
 
     /**

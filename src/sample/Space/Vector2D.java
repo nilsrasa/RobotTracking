@@ -106,6 +106,16 @@ public class Vector2D {
         return new Vector2D(maxX, maxY);
     }
 
+    /**
+     * Returns the dot product of two vectors, (ax*bx + ay*by)
+     * @param a first Vetor2D
+     * @param b second Vector2D
+     * @return float dot product
+     */
+    public static float DotProduct(Vector2D a, Vector2D b){
+        return a.getX()*b.getX()+a.getY()*b.getY();
+    }
+
 
     //Public methods:
     /**

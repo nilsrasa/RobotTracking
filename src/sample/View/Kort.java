@@ -1,10 +1,8 @@
 package sample.View;
 
-import javafx.application.Application;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 import sample.Debug;
 import sample.Objects.Bold;
 import sample.Objects.Forhindring;
@@ -13,12 +11,8 @@ import sample.Objects.Robot;
 import sample.Space.Grid;
 import sample.Space.Node;
 import sample.Space.Vector2D;
-import sample.TestData;
-import sample.View.IDrawable;
 
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class Kort {
@@ -38,6 +32,11 @@ public class Kort {
         this.WIDTH = (float)canvas.getWidth();
         this.HEIGHT = (float)canvas.getHeight();
 
+    }
+
+    public void setScale(Vector2D[] corners){
+        //TODO: set scale from here
+        //TODO: remember to update the scale of every object
     }
 
     public Grid getGrid() {
@@ -128,6 +127,13 @@ public class Kort {
         if(Debug.DEBUG)
             for(IDrawable obj:debug)
                 obj.draw(context);
+
+            if(robot.getTarget() != null){
+                context.setLineWidth(2);
+                context.setStroke(Color.CYAN);
+                context.strokeLine(robot.getPos().getX(), robot.getPos().getY(),
+                        robot.getTarget().getPos().getX(), robot.getTarget().getPos().getY());
+            }
 
     }
 }

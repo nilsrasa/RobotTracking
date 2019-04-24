@@ -16,6 +16,7 @@ public class Robot extends SpaceObject implements IMovableObject, IDrawable, Upd
     private Color color;
     private Vector2D dest;
     private float speed;
+    private SpaceObject target;
 
     @Override
     public void moveTo(Vector2D dest) {
@@ -29,8 +30,17 @@ public class Robot extends SpaceObject implements IMovableObject, IDrawable, Upd
 
     @Override
     public void draw(GraphicsContext context) {
+        context.save();
+        context.translate(position.getX(), position.getY());
+        context.rotate(rotation);
+        context.translate(-position.getX(), -position.getY());
+
         context.setFill(color);
-        context.fillPolygon(
+        context.fillRect(position.getX()-width/2,position.getY()-height/2, width, height);
+        context.setStroke(color.invert());
+        context.setLineWidth(height/4);
+        context.strokeLine(position.getX(),position.getY(),position.getX()+width/2,position.getY());
+        /*context.fillPolygon(
                 new double[]{
                         position.getX()-width/2,
                         position.getX()-width/2,
@@ -39,7 +49,9 @@ public class Robot extends SpaceObject implements IMovableObject, IDrawable, Upd
                         position.getY()-height/2,
                         position.getY()+height/2,
                         position.getY()},
-                3);
+                3);*/
+
+        context.restore();
     }
 
     @Override
@@ -50,6 +62,36 @@ public class Robot extends SpaceObject implements IMovableObject, IDrawable, Upd
     @Override
     public void setColor(Color col) {
         this.color = col;
+    }
+
+    public void setTarget(SpaceObject target){
+        this.target = target;
+        turnToward(target.position);
+    }
+
+    public SpaceObject getTarget(){
+        return target;
+    }
+
+    public void turnToward(Vector2D point){
+        Vector2D direction = Vector2D.CopyOf(point).subtract(position);
+
+        Vector2D v;
+        int d;
+        if (point.getY() < position.getY()){
+            v = Vector2D.LEFT;
+            d = 180;
+        }
+        else {
+            v = Vector2D.RIGHT;
+            d = 0;
+        }
+
+        float cos0 = Vector2D.DotProduct(v,direction) /
+                (v.getMagnitude() * direction.getMagnitude());
+
+        rotation = (float)Math.toDegrees(Math.acos(cos0))+d;
+        System.out.println(rotation);
     }
 
     @Override
