@@ -127,13 +127,5 @@ public class Kort {
         if(Debug.DEBUG)
             for(IDrawable obj:debug)
                 obj.draw(context);
-
-            if(robot.getTarget() != null){
-                context.setLineWidth(2);
-                context.setStroke(Color.CYAN);
-                context.strokeLine(robot.getPos().getX(), robot.getPos().getY(),
-                        robot.getTarget().getPos().getX(), robot.getTarget().getPos().getY());
-            }
-
     }
 }

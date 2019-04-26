@@ -7,19 +7,21 @@ import sample.Objects.Mål;
 import sample.Objects.Robot;
 import sample.Space.Grid;
 import sample.Space.Node;
+import sample.Space.Path;
 import sample.Space.Vector2D;
 import sample.View.Colors;
 import sample.View.Kort;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
 public class Controller {
-    private final int NANOMILLI = 1000000,
-    UPDATETIME = 5000;
+    private final int UPDATETIME = 1000;
     Kort map;
+    Path path;
     private long lastTime;
 
 
@@ -29,6 +31,7 @@ public class Controller {
 
     public void start(){
         createObjects();
+        createPath();
 
         new AnimationTimer() {
             @Override
@@ -43,18 +46,39 @@ public class Controller {
                 if (cur - lastTime > UPDATETIME) {
                     lastTime = cur;
 
-                    Grid grid = map.getGrid();
-
-                    Vector2D[] vA = TestData.getBalls();
-                    map.setBalls(createBalls(vA, grid));
-
-                    Bold[] balls = map.getBalls().toArray(new Bold[0]);
-                    map.getRobot().setTarget(balls[new Random().nextInt(balls.length)]);
-
+                    //Draw map
                     map.update();
                 }
             }
         }.start();
+    }
+
+    private void createPath() {
+        path = new Path(map.getRobot().getPos());
+        path.setColor(Colors.PATH);
+
+        Set<Bold> balls = new HashSet<>(map.getBalls());
+        Bold ball = null;
+        float min = Float.MAX_VALUE;
+        int size = balls.size();
+        for (int i = 0; i < size; i++){
+            for (Bold b : balls){
+                float dist = Vector2D.Distance(b.getPos(), path.getLast());
+                if (dist < min){
+                    min = dist;
+                    ball = b;
+                }
+            }
+            if (ball != null) {
+                min = Float.MAX_VALUE;
+                balls.remove(ball);
+                path.addPoint(ball.getPos());
+                ball = null;
+            }
+        }
+        map.addDebugObject(path);
+
+        System.out.println("Path lenght is: "+path.getLenght());
     }
 
     private void createObjects(){
@@ -127,9 +151,6 @@ public class Controller {
         vA = TestData.getBalls();
 
         map.setBalls(createBalls(vA, grid));
-
-        //Draw the map
-        map.update();
     }
 
     private Set<Bold> createBalls(Vector2D[] vA, Grid grid){

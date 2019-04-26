@@ -11,6 +11,7 @@ public class Colors {
     BALL = Color.WHITE,
     GOAL = Color.LIGHTGRAY,
     OBSTACLE = Color.RED,
-    NODE = Color.CORAL;
+    NODE = Color.CORAL,
+    PATH = Color.CYAN;
 
 }

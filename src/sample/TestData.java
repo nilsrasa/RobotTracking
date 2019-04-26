@@ -15,7 +15,7 @@ public class TestData {
     public static final Vector2D robot = new Vector2D(97, 403);
 
     public static Vector2D[] getBalls(){
-        Vector2D[] balls = new Vector2D[15];
+        Vector2D[] balls = new Vector2D[10];
         Random random = new Random();
         for (int i = 0; i < balls.length; i++){
             balls[i] = new Vector2D(
