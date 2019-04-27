@@ -10,6 +10,7 @@ import sample.Space.Vector2D;
 public abstract class SpaceObject {
     protected Vector2D position;
     protected float rotation, height, width;
+    private final int FULL_ROT = 360;
 
     /**
      * Returns the current x,y position as a Vector2D
@@ -40,7 +41,9 @@ public abstract class SpaceObject {
      * @param rot the new rotation
      */
     public void setRotation(float rot) {
-        this.rotation = rot;
+        this.rotation = rot%FULL_ROT;
+        if (this.rotation < 0)
+            this.rotation += FULL_ROT;
     }
 
     /**

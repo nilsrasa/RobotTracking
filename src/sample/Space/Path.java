@@ -34,6 +34,10 @@ public class Path implements IDrawable {
         return lenght;
     }
 
+    public void smoothPath(){
+        //TODO: algorithm to smooth out the path, make it more direct from the robot to the goal
+    }
+
     public Vector2D getLast(){
         return path.get(path.size()-1);
     }

@@ -90,7 +90,10 @@ public class Robot extends SpaceObject implements IMovableObject, IDrawable, Upd
         float cos0 = Vector2D.DotProduct(v,direction) /
                 (v.getMagnitude() * direction.getMagnitude());
 
-        rotation = (float)Math.toDegrees(Math.acos(cos0))+d;
+        float old_rot = getRotation();
+        setRotation((float)Math.toDegrees(Math.acos(cos0))+d);
+
+        System.out.println("Robot rotated "+(getRotation()-old_rot)+" degrees.");
     }
 
     @Override
