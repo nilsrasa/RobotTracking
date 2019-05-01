@@ -79,6 +79,7 @@ public class Controller {
         map.addDebugObject(path);
 
         System.out.println("Path lenght is: "+path.getLenght());
+        System.out.println("Path lenght in mm is: "+map.getGrid().translateLengthToMilimeters(path.getLenght()));
     }
 
     private void createObjects(){

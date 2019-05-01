@@ -8,11 +8,11 @@ import sample.View.IDrawable;
 /**
  * Represents a coordinate system grid
  * @author DFallingHammer
- * @version 1.0.2
+ * @version 1.0.3
  */
 public class Grid implements IDrawable {
     final float WIDTH, HEIGHT;
-    public final float CELLS_HOR = 45, CELLS_VER = 30, GOAL_LEFT = 2, GOAL_RIGHT = 5;
+    public final float CELLS_HOR = 41.75f, CELLS_VER = 30.5f, GOAL_LEFT = 2.25f, GOAL_RIGHT = 4, UNIT_MM = 40;
     public final Vector2D CELL_SPACING;
     Vector2D scale, offset, spacing;
     Color color;
@@ -56,6 +56,17 @@ public class Grid implements IDrawable {
                 .scale(scale) //Scale to actual grid size
                 .clamp(new Vector2D(0,0), new Vector2D(WIDTH, HEIGHT)); //Clamp inside grid bounds
         return pos;
+    }
+
+    /**
+     * Used to translate a length from the grid into real world millimeters
+     * @param lenght the lenght to be translated
+     * @return float length in millimeters
+     */
+    public float translateLengthToMilimeters(float lenght){
+        float new_lenght = lenght/((CELL_SPACING.getX()+CELL_SPACING.getY())/2);
+        new_lenght *= UNIT_MM;
+        return new_lenght;
     }
 
     @Override
