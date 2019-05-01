@@ -3,7 +3,7 @@ package sample.Space;
 /**
  * A class that represents vectors in 2D space and can handle different vector calculations.
  * @author DFallingHammer
- * @version 1.0.0
+ * @version 1.1.0
  */
 public class Vector2D {
 
