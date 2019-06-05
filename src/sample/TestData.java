@@ -13,6 +13,7 @@ public class TestData {
     };
 
     public static final Vector2D robot = new Vector2D(97, 403);
+    public static final Vector2D[] robotPos = {new Vector2D(97, 403), new Vector2D(107,413)};
 
     public static Vector2D[] getBalls(){
         Vector2D[] balls = new Vector2D[10];

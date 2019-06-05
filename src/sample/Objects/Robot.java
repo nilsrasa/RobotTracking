@@ -74,24 +74,8 @@ public class Robot extends SpaceObject implements IMovableObject, IDrawable, Upd
     }
 
     public void turnToward(Vector2D point){
-        Vector2D direction = Vector2D.CopyOf(point).subtract(position);
-
-        Vector2D v;
-        int d;
-        if (point.getY() < position.getY()){
-            v = Vector2D.LEFT;
-            d = 180;
-        }
-        else {
-            v = Vector2D.RIGHT;
-            d = 0;
-        }
-
-        float cos0 = Vector2D.DotProduct(v,direction) /
-                (v.getMagnitude() * direction.getMagnitude());
-
         float old_rot = getRotation();
-        setRotation((float)Math.toDegrees(Math.acos(cos0))+d);
+        setRotation(Vector2D.Angle(position, point));
 
         System.out.println("Robot rotated "+(getRotation()-old_rot)+" degrees.");
     }

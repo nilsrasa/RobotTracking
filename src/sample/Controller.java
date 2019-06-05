@@ -13,10 +13,7 @@ import sample.View.Colors;
 import sample.View.Kort;
 
 import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 public class Controller {
     private final int UPDATETIME = 1000;
@@ -24,14 +21,13 @@ public class Controller {
     Path path;
     private long lastTime;
 
-
     public void createMap(Kort map){
         this.map = map;
     }
 
     public void start(){
         createObjects();
-        createPath();
+        //createPath();
 
         new AnimationTimer() {
             @Override
@@ -46,11 +42,32 @@ public class Controller {
                 if (cur - lastTime > UPDATETIME) {
                     lastTime = cur;
 
+                    //updatePositions();
+
                     //Draw map
                     map.update();
                 }
             }
         }.start();
+    }
+
+    private void updatePositions(){
+        Grid grid = map.getGrid();
+        //Update balls
+        //TODO get positions
+        Vector2D[] ballPositions = TestData.getBalls();
+        map.setBalls(createBalls(ballPositions, grid));
+
+        //Update robot
+        Vector2D[] robotPositions = TestData.robotPos;
+        map.setRobot(createRobot(robotPositions, grid));
+    }
+
+    private void getBalls(){
+        //TODO get positions
+        Vector2D[] positions;
+        Set<Bold> balls;
+
     }
 
     private void createPath() {
@@ -107,12 +124,7 @@ public class Controller {
         map.setNodes(nodes);
 
         //The Robot:
-        Robot robot = new Robot();
-        robot.setPos(grid.translatePos(TestData.robot));
-        robot.setWidth(grid.CELL_SPACING.getX()*1.5f);
-        robot.setHeight(grid.CELL_SPACING.getY()*1.5f);
-        robot.setColor(Colors.ROBOT);
-        map.setRobot(robot);
+        map.setRobot(createRobot(TestData.robotPos, grid));
 
         //Obstacles
         Set<Forhindring> obstacles = new HashSet<>();
@@ -166,5 +178,28 @@ public class Controller {
             );
         }
         return new HashSet<>(Arrays.asList(balls));
+    }
+
+    private Robot createRobot(Vector2D[] vA, Grid grid){
+        Robot robot = new Robot();
+        //Oversætter positionerne
+        vA = grid.translatePositions(vA);
+        //Finder midten af roboten
+        //TODO: maybe choose min over max?
+        Vector2D pos = new Vector2D((vA[0].getX()+vA[1].getX())/2, (vA[0].getY()+vA[1].getY())/2);
+        System.out.println(pos.getX()+", "+pos.getY());
+        robot.setPos(pos);
+        //Finder robotens størrelse
+        float dist = Vector2D.Distance(vA[0], vA[1]);
+        System.out.println(dist);
+        robot.setWidth(grid.CELL_SPACING.getX()*1.5f);
+        robot.setHeight(grid.CELL_SPACING.getY()*1.5f);
+        //Finder robotens vinkel
+        float angle = Vector2D.Angle(vA[0], vA[1]);
+        robot.setRotation(angle);
+        //Farven
+        robot.setColor(Colors.ROBOT);
+
+        return robot;
     }
 }

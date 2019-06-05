@@ -49,6 +49,32 @@ public class Vector2D {
     }
 
     /**
+     * Returns the angle in degrees between two vectors
+     * @param a starting point
+     * @param b end point
+     * @return float angle in degrees
+     */
+    public static float Angle(Vector2D a, Vector2D b){
+        Vector2D direction = Vector2D.CopyOf(b).subtract(a);
+
+        Vector2D v;
+        int d;
+        if (b.getY() < a.getY()){
+            v = Vector2D.LEFT;
+            d = 180;
+        }
+        else {
+            v = Vector2D.RIGHT;
+            d = 0;
+        }
+
+        float cos0 = Vector2D.DotProduct(v,direction) /
+                (v.getMagnitude() * direction.getMagnitude());
+
+        return (float)Math.toDegrees(Math.acos(cos0))+d;
+    }
+
+    /**
      * Returns the float distance between two Vector2D.
      * @param a first Vector2D
      * @param b second Vector2D

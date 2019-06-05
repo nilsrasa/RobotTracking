@@ -58,6 +58,14 @@ public class Grid implements IDrawable {
         return pos;
     }
 
+    public Vector2D[] translatePositions(Vector2D[] positions){
+        Vector2D[] newPos = new Vector2D[positions.length];
+        for (int i = 0; i < newPos.length; i++){
+            newPos[i] = translatePos(positions[i]);
+        }
+        return newPos;
+    }
+
     /**
      * Used to translate a length from the grid into real world millimeters
      * @param lenght the lenght to be translated
